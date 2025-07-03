@@ -15,6 +15,14 @@
 - Visualizes cost vs threshold tradeoffs using line graphs.
 - Outputs a report showing which patients were flagged and why.
 
+  **Streamlit:**
+- You can view this project through a live streamlit web app:
+- https://natiqg13-diabetes-risk-predictor-app-qj0zgo.streamlit.app/
+- You can also upload your own CSV of patient data.
+- The web app allows you to adjust alert thresholds, view risk scores, top contributing features, SHAP predictions, and cost tradeoffs.
+- It also allows you to download the CSV file that's currently in use.
+  
+
 **How to run the project:**
 
 - Clone the repository.
@@ -42,3 +50,5 @@
 ![THCvDAT](https://github.com/user-attachments/assets/46eda958-017c-49e3-a04d-a5f02f8f4ff6)
 ![Shap1](https://github.com/user-attachments/assets/fa533706-e07b-4068-8749-6bf80101f5f0)
 ![Shap2](https://github.com/user-attachments/assets/225b4a22-471c-40be-bc20-b5ef712e48bd)
+
+
