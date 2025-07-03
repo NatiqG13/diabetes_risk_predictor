@@ -41,14 +41,14 @@ st.dataframe(alerts_df.head(10))
 
 
 st.subheader(" Global Feature Importance")
-st.image("outputs/Shap1.png", use_container_width=True)
+st.image("static/Shap1.png", use_container_width=True)
 
 
 st.subheader(" Single Prediction Breakdown")
-st.image("outputs/Shap2.png", use_container_width=True)
+st.image("static/Shap2.png", use_container_width=True)
 
 st.subheader(" Hospital Cost Curve")
-st.image("outputs/THCvDAT.png", use_container_width=True)
+st.image("static/THCvDAT.png", use_container_width=True)
 
 
 st.subheader(" Download Full Alert Report")
