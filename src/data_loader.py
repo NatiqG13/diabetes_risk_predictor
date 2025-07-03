@@ -3,14 +3,14 @@ import pandas as pd
 
 def load_data(path):
     '''
-    Loads a CSV from the given path and returns a DataFrame
+    Loads a CSV from the given path and returns a DataFrame.
     '''
     df = pd.read_csv(path)
     return df
 
 def clean_data(df):
     '''
-    Used to clean the values by replacing the 0s with the median
+    Used to clean the values by replacing the 0s with the median.
     '''
     median_glucose = df['Glucose'][df['Glucose'] != 0].median()
     median_bloodPressure = df['BloodPressure'][df['BloodPressure'] != 0].median()

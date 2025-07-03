@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 
 
 def plot_feature_kde(df):
+    '''
+    Plots kde curves for specific clinical features, separated by diabetes outcome (Diabetic = 1, Non diabetic = 0).
+    '''
+  
     
     Glucose_Outcome1 = df['Glucose'][df['Outcome'] == 1]
     Glucose_Outcome0 = df['Glucose'][df['Outcome'] == 0]

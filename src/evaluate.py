@@ -5,6 +5,9 @@ import numpy as np
 
 
 def evaluate_model(model, X_test,y_test):
+    '''
+    Evaluates precision and recall at thresholds from 0.1 to 0.9 and returns error counts.
+    '''
 
     probs = model.predict_proba(X_test)[:,1]
 
@@ -31,6 +34,9 @@ def evaluate_model(model, X_test,y_test):
     return threshold, precision_scores, recall_scores, FN, FP
 
 def compute_cost_curve(y_true, y_probs, threshold, cost_fn, cost_fp,FN,FP):
+    '''
+    Computes total cost at each threshold based on FN and FP counts and their respective costs.
+    '''
 
     
     total_costs = []

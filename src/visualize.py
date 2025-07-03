@@ -9,6 +9,9 @@ from src.interpret import get_model_coefficients
 from src.interpret import run_shap
 
 def plot_cost_curve(threshold, total_cost, FN, FP):
+    '''
+    Plots threshold vs. total hospital cost and prints the lowest-cost configuration.
+    '''
     df = pd.DataFrame({"Threshold" : threshold, "Total cost": total_cost})
     df.plot(x="Threshold",y="Total cost")
     plt.title("Total Hospital Cost vs. Diabetes Alert Threshold")
@@ -32,6 +35,9 @@ def plot_cost_curve(threshold, total_cost, FN, FP):
     return best_threshold
 
 def plot_shap(logreg, X_test):
+    '''
+    Displays SHAP summary and waterfall plots to explain model predictions.
+    '''
     explainer, shap_values, X_test = run_shap(logreg, X_test)
 
     shap.summary_plot(shap_values, X_test)  
@@ -41,6 +47,9 @@ def plot_shap(logreg, X_test):
     plt.close()
 
 def print_business_summary(thresholds, total_cost, FP, FN):
+    '''
+    Prints the cost-optimal threshold and business interpretation of FP/FN tradeoffs.
+    '''
     best_index = np.argmin(total_cost)
     best_threshold = thresholds[best_index]
     best_fp = FP[best_index]

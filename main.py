@@ -11,6 +11,17 @@ from src.interpret import get_model_coefficients, build_alert_table, run_shap
 
 path = 'data/raw.csv'
 
+'''
+Main pipeline script:
+- Loads and cleans data
+- Runs EDA plots
+- Engineers features
+- Trains logistic regression
+- Evaluates cost and performance
+- Plots SHAP & outputs alert report
+'''
+
+
 df = load_data(path)
 df = clean_data(df)
 df = engineer_features(df)

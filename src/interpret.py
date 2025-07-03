@@ -5,6 +5,9 @@ import shap
 from src.model import get_logistic_model
 
 def get_model_coefficients(logreg, X_test):
+    '''
+    Returns a DataFrame showing each feature's coefficient and their absolute importance.
+    '''
 
     coefficients = logreg.coef_
     coefficients = coefficients.flatten()
@@ -27,11 +30,17 @@ def get_model_coefficients(logreg, X_test):
     return coef_df
 
 def run_shap(logreg, X_test):
+    '''
+    Runs SHAP on the logistic model and returns the explainer and SHAP values.
+    '''
     explainer = shap.LinearExplainer(logreg, X_test)
     shap_values = explainer.shap_values(X_test)
     return explainer, shap_values, X_test
 
 def build_alert_table(model, X_test, threshold, shap_values, top_n=3):
+    '''
+    Builds a summary table of predicted diabetes risk, alert status, and top 3 contributing features.
+    '''
     probs = model.predict_proba(X_test)[:, 1]
     alerts = probs >= threshold
 
