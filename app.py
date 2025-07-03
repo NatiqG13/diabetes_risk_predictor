@@ -25,7 +25,7 @@ if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
 else:
     st.sidebar.markdown("Or use default sample data.")
-    data = pd.read_csv("raw.csv")
+    data = pd.read_csv("data/raw.csv")
 
 
 
