@@ -1,54 +1,123 @@
-**Diabetes Risk Predictor**
-
-- Helps identify patients who could potentially be at risk of having diabetes using logistic regression, cost optimization, and interpretable model explanations.
-
-- This project predicts a patient's risk of diabetes by analyzing early health indicators such as glucose, insulin, BMI, and age. It uses logistic regression to classify risk levels and identify which features contribute most to each prediction.
-- The system tunes decision thresholds to minimize hospital costs, prioritizes reducing false negatives, and generates accessible tables for doctors to review.
-- It also includes visual tools like cost graphs and SHAP plots to explain how predictions are made.
-- The final output supports hospital decision-making by flagging high-risk patients and clearly showing which clinical factors had the most impact.
-
-**Features:**
-
-- Uses logistic regression on clinical features like glucose, insulin, BMI, and age.
-- Includes cost aware threshold tuning to help reduce false negatives.
-- Explains predictions using both model coefficients and SHAP values.
-- Visualizes cost vs threshold tradeoffs using line graphs.
-- Outputs a report showing which patients were flagged and why.
-
-  **Streamlit:**
-- You can view this project through a live streamlit web app:
-- https://natiqg13-diabetes-risk-predictor-app-qj0zgo.streamlit.app/
-- You can also upload your own CSV of patient data.
-- The web app allows you to adjust alert thresholds, view risk scores, top contributing features, SHAP predictions, and cost tradeoffs.
-- It also allows you to download the CSV file that's currently in use.
-  
-
-**How to run the project:**
-
-- Clone the repository.
-- Go to the project folder.
-- Create and activate a virtual environment (python -m venv venv) (.\venv\Scripts\activate)
-- Install dependencies (pip install -r requirements.txt)
-- Run the project in main. (python main.py)
-- After running, you'll see visual plots (SHAP, cost curves), summary of threshold predictions, model coefficients, and a CSV report showing patient alerts.
-
-  **Project Outputs:**
-  - Cost Curve Plot: Line graphs showing hospital costs at different thresholds.
-  - SHAP Summary Plot: Helps highlight which clinical features will have the greatest impact on model predictions overall.
-  - Shap Waterfall Plot: Helps break down why one specific patient was flagged.
-  - Model Coefficient Features: Shows the influence of each feature within the logistic regression model.
-  - CSV: Flags high risk patients and explains why they were flagged.
+**Diabetes Risk Prediction & Clinical Decision Support System**
 
 
-![Figure_1](https://github.com/user-attachments/assets/836b7cea-da7f-4eee-a86a-3544c5bb0c30)
-![Figure_2](https://github.com/user-attachments/assets/dca81b47-026b-4b0f-be78-8da9adb74058)
-![Figure_3](https://github.com/user-attachments/assets/b8519d3c-eac0-410a-b8da-4533da29c28b)
-![Figure_4](https://github.com/user-attachments/assets/2e0f492d-fa32-46a7-b332-a3550b7be351)
-![Figure_5](https://github.com/user-attachments/assets/40886235-fec2-4ed2-925e-12d0fc3ef3a0)
-![Figure_6](https://github.com/user-attachments/assets/9deda789-4162-47fe-b8d9-f371b1881acb)
-![Figure_7](https://github.com/user-attachments/assets/e2a6ec83-e653-42f5-a6e9-a7168903df73)
-![THCvDAT](https://github.com/user-attachments/assets/46eda958-017c-49e3-a04d-a5f02f8f4ff6)
-![Shap1](https://github.com/user-attachments/assets/fa533706-e07b-4068-8749-6bf80101f5f0)
-![Shap2](https://github.com/user-attachments/assets/225b4a22-471c-40be-bc20-b5ef712e48bd)
+## Overview
+
+This project implements a cost-sensitive clinical decision support system to identify patients at elevated risk of diabetes using early health indicators such as glucose, insulin, BMI, and age.
+
+A logistic regression model is trained to estimate diabetes risk probabilities, while decision thresholds are optimized to minimize hospital costs and reduce false negatives. The system emphasizes interpretability through model coefficients and SHAP explanations, enabling clinicians to understand both population-level trends and individual patient predictions.
+
+
+## Problem Framing & Objective
+
+In a clinical setting, diabetes screening models must balance predictive accuracy with real-world cost considerations. False negatives (missed high-risk patients) can lead to delayed treatment and significantly higher downstream healthcare costs, while excessive false positives can overburden hospital resources.
+
+The objective of this project is not only to predict diabetes risk, but to optimize alerting decisions under cost constraints. Instead of using a fixed probability threshold, the system evaluates multiple thresholds and selects operating points that reduce total hospital cost while prioritizing early detection of high-risk patients.
+
+
+## ML Pipeline Overview
+
+The system follows a modular machine learning pipeline designed to support experimentation, interpretability, and cost-aware decision-making:
+
+1. **Data Loading & Cleaning**  
+   Raw patient data is loaded from CSV files and cleaned to handle missing values and inconsistent entries.
+
+2. **Feature Engineering**  
+   Clinical features such as glucose, insulin, BMI, age, and skin thickness are standardized and prepared for modeling.
+
+3. **Model Training**  
+   A logistic regression model is trained to produce calibrated probability estimates for diabetes risk rather than hard class labels.
+
+4. **Evaluation & Threshold Analysis**  
+   Model outputs are evaluated across a range of decision thresholds to analyze tradeoffs between false positives, false negatives, and total hospital cost.
+
+5. **Interpretability & Visualization**  
+   Model behavior is analyzed using coefficient inspection and SHAP explanations to provide both global and per-patient insight into predictions.
+
+
+## Model & Decision Logic
+
+The system uses logistic regression to model diabetes risk as a probability rather than a binary outcome. This choice provides a transparent, well-calibrated baseline model that supports downstream decision-making and interpretability.
+
+Instead of applying a fixed classification threshold, predicted probabilities are evaluated across a range of alert thresholds. For each threshold, the system computes downstream outcomes such as false positives, false negatives, and total estimated hospital cost.
+
+Final alert decisions are made by selecting thresholds that balance early detection with operational cost constraints, allowing the same trained model to support different sensitivity levels without retraining.
+
+
+## Interpretability & Clinical Explainability
+
+Model interpretability is a core design requirement of the system. Predictions are explained at both the population level and the individual patient level to support clinical review and trust.
+
+- **Global Interpretability**  
+  Logistic regression coefficients and SHAP summary plots are used to identify which clinical features (e.g., glucose, BMI, age) have the greatest overall influence on diabetes risk predictions.
+
+- **Local Interpretability**  
+  SHAP waterfall plots are generated for individual patients to explain why a specific risk score was assigned and which features contributed most to that prediction.
+
+These explanations allow clinicians to validate model behavior, understand decision rationale, and assess whether flagged alerts align with clinical intuition.
+
+
+## Cost-Sensitive Threshold Optimization
+
+To translate risk probabilities into actionable alerts, the system evaluates decision thresholds under a cost-sensitive framework. Each threshold is analyzed based on its impact on false positives, false negatives, and total estimated hospital cost.
+
+Cost curves are generated to visualize how total cost varies as a function of the alert threshold. This enables selection of operating points that prioritize early detection while avoiding excessive alert volume.
+
+By decoupling model training from decision threshold selection, the system allows clinical teams to adjust sensitivity levels without retraining the underlying model.
+
+
+## Outputs & Artifacts
+
+For each run, the system generates structured outputs intended to support both clinical review and downstream analysis:
+
+- **Risk Scores & Alerts (CSV)**  
+  A tabular report containing patient-level risk probabilities, alert flags, and contributing features.
+
+- **Cost Curve Plots**  
+  Line plots showing total estimated hospital cost across decision thresholds, used to select optimal operating points.
+
+- **Interpretability Visualizations**  
+  - SHAP summary plots highlighting globally important clinical features  
+  - SHAP waterfall plots explaining individual patient predictions  
+  - Model coefficient tables showing feature influence direction and magnitude
+
+- **Evaluation Metrics**  
+  Precision, recall, confusion matrices, and threshold-specific outcome summaries.
+
+Representative examples of these outputs are shown below; all plots are generated automatically during execution.
+
+
+### Cost vs Threshold Tradeoff
+
+![](path/to/cost_curve.png)
+
+### Global Feature Importance (SHAP)
+
+![](path/to/shap_summary.png)
+
+### Individual Prediction Explanation
+
+![](path/to/shap_waterfall.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
