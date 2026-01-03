@@ -1,4 +1,4 @@
-**Diabetes Risk Prediction**
+**Diabetes Risk Prediction **
 
 
 ## Overview
@@ -98,6 +98,7 @@ Representative examples of these outputs are shown below; all plots are generate
 ### Individual Prediction Explanation
 
 ![](outputs/Shap1.png)
+
 
 
 
