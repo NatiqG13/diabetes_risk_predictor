@@ -89,15 +89,17 @@ Representative examples of these outputs are shown below; all plots are generate
 
 ### Cost vs Threshold Tradeoff
 
-![](path/to/cost_curve.png)
+![](outputs/THCvDAT.png)
 
 ### Global Feature Importance (SHAP)
 
-![](path/to/shap_summary.png)
+![](outputs/Shap2.png)
 
 ### Individual Prediction Explanation
 
-![](path/to/shap_waterfall.png)
+![](outputs/Shap1.png)
+
+
 
 
 
